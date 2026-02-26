@@ -1,4 +1,23 @@
-<?php require"./functions/function.php" ?>
+<?php 
+    session_start();
+    //session start
+
+    require"./functions/function.php";
+    $Allowed_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
+    //Allowed characters for password generation
+
+    if(isset($_GET["psw_length"])){
+    //On loading: generate password only if the length parameter is present
+        $psw_length = $_GET["psw_length"];
+        $password = psw_generator($psw_length, $Allowed_chars);
+        $_SESSION["password"] = $password;
+
+        header("Location: ./show_password.php");
+
+        exit;
+    }
+
+?>
 
 
 <!DOCTYPE html>
@@ -22,25 +41,7 @@
             <a href="./index.php">Ripulisci il risultato</a>
         </form>
 
-        <p>La tua password apparirà qui sotto</p>
-
-        <?php 
-        
-        $Allowed_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
-
-            $field_password = "";
-            if(!isset($_GET["psw_length"])){
-                $field_password =  "<input type='text' placeholder='Password...' readonly >";
-                echo $field_password;
-                
-            }
-            else{
-                $psw_length = (int)$_GET["psw_length"];
-                $password= psw_generator($psw_length, $Allowed_chars);
-                $field_password =  "<input type='text' value='$password' readonly >";
-                echo $field_password;
-            }
-        ?>
+        <p>Sarai indirizzato alla pagina di visualizzazione</p>
     </main>
     <footer></footer>
     

@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +11,14 @@
 </head>
 <body>
     <header></header>
-    <main></main>
+    <main>
+        <p>Qui sotto la tua password:</p><br>
+        <?php 
+            echo "<b>{$_SESSION['password']}</b>";
+            
+        
+        ?>
+    </main>
     <footer></footer>
     
 </body>
